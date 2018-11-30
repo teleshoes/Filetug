@@ -99,14 +99,6 @@ Page {
     }
 
     Component.onCompleted: updateModel()
-    section {
-        property: 'section'
-
-        delegate: SectionHeader {
-            text: section
-            height: Theme.itemSizeExtraSmall
-        }
-    }
 
     ListModel {
         id: listModel
@@ -117,61 +109,36 @@ Page {
      */
     function updateModel()
     {
-        listModel.clear()
+      listModel.clear()
+      var shortcuts = [
+        "Last Location",   "qrc:/icons/up",         settings.dirPath,
+        "SD card",         "qrc:/icons/sdcard",     engine.getSdCardMountPath(),
+        "Documents",       "qrc:/icons/text",       StandardPaths.documents,
+        "Downloads",       "qrc:/icons/downloads",  fileList.getHomePath() + "/Downloads",
+        "Music",           "qrc:/icons/audio",      StandardPaths.music,
+        "Pictures",        "qrc:/icons/image",      StandardPaths.pictures,
+        "Videos",          "qrc:/icons/video",      StandardPaths.videos,
+        "Android storage", "qrc:/icons/directory",  "/data/sdcard",
+      ]
 
-        // Add locations
-        listModel.append({ "section": "Locations",
-                           "name": "Last location",
-                           "thumbnail": "qrc:/icons/up",
-                           "location": settings.dirPath })
+      for (var i=0; i<shortcuts.length; i+=3){
+        listModel.append({ "name":      shortcuts[i]
+                         , "thumbnail": shortcuts[i+1]
+                         , "location":  shortcuts[i+2]
+                         })
+      }
 
-        listModel.append({ "section": "Locations",
-                           "name": "Documents",
-                           "thumbnail": "qrc:/icons/text",
-                           "location": StandardPaths.documents })
-        listModel.append({ "section": "Locations",
-                           "name": "Downloads",
-                           "thumbnail": "qrc:/icons/downloads",
-                           "location": fileList.getHomePath() + "/Downloads" })
-        listModel.append({ "section": "Locations",
-                           "name": "Music",
-                           "thumbnail": "qrc:/icons/audio",
-                           "location": StandardPaths.music })
-        listModel.append({ "section": "Locations",
-                           "name": "Pictures",
-                           "thumbnail": "qrc:/icons/image",
-                           "location": StandardPaths.pictures })
-        listModel.append({ "section": "Locations",
-                           "name": "Videos",
-                           "thumbnail": "qrc:/icons/video",
-                           "location": StandardPaths.videos })
-        listModel.append({ "section": "Locations",
-                           "name": "Android storage",
-                           "thumbnail": "qrc:/icons/directory",
-                           "location": "/data/sdcard"})
+      var bookmarks = settings.getBookmarks()
 
-        // Add bookmarks if there are any
-        var bookmarks = settings.getBookmarks()
+      for (var key in bookmarks){
+        var entry = bookmarks[key];
 
-        for (var key in bookmarks)
-        {
-            var entry = bookmarks[key];
-
-            listModel.append({ "section": "Bookmarks",
-                               "name": entry,
-                               "thumbnail": "qrc:/icons/sdcard",
-                               "location": key,
-                               "bookmark": true })
-        }
-
-        // Add SD card if it's mounted
-        if (engine.getSdCardMountPath() != "")
-        {
-            listModel.append({ "section": "Storage devices",
-                               "name": "SD card",
-                               "thumbnail": "qrc:/icons/sdcard",
-                               "location": engine.getSdCardMountPath()})
-        }
+        listModel.append({ "name":      entry
+                         , "thumbnail": "qrc:/icons/directory"
+                         , "location":  key
+                         , "bookmark":  true
+                         })
+      }
     }
   }
 }
