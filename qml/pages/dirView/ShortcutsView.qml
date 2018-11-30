@@ -102,12 +102,10 @@ Page {
     ListModel {
         id: listModel
     }
+  }
 
-    /*
-     *  Create model entries
-     */
-    function updateModel()
-    {
+  //Create model entries
+  function updateModel(){
       listModel.clear()
       var shortcuts = [
         "Last Location",   "qrc:/icons/up",         settings.dirPath,
@@ -138,6 +136,5 @@ Page {
                          , "bookmark":  true
                          })
       }
-    }
   }
 }
