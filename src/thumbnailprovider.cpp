@@ -4,10 +4,11 @@ QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSi
 {
     QFileInfo fileInfo(id);
 
+    QString idLC = id.toLower();
     // Check that the file is actually an image before creating a directory
     // and trying to create a thumbnail
-    if (!id.endsWith(".png") && !id.endsWith(".jpg") && !id.endsWith(".jpeg")
-            && !id.endsWith(".gif") && !id.endsWith(".svg"))
+    if (!idLC.endsWith(".png") && !idLC.endsWith(".jpg") && !idLC.endsWith(".jpeg")
+            && !idLC.endsWith(".gif") && !idLC.endsWith(".svg"))
         return QImage();
 
     // Check that the directory for thumbnails exists

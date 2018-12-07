@@ -127,7 +127,7 @@ QString FileInfo::getFileFormatName(QString suffix)
 
     formatNames.insert("txt", "Text file");
 
-    if (formatNames.contains(suffix))
+    if (formatNames.contains(suffix.toLower()))
         return formatNames.value(suffix);
     else
         return "unknown";

@@ -142,7 +142,7 @@ void DirectoryWorker::createFileInfoEntryList()
             {
                 QString format = formats.at(ii);
 
-                if (fileInfo.fileName().endsWith(format))
+                if (fileInfo.fileName().toLower().endsWith(format))
                 {
                     fileType = type;
 
