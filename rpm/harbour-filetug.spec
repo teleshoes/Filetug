@@ -13,8 +13,8 @@ Name:       harbour-filetug
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    harbour-filetug
-Version:    0.2
-Release:    9
+Version:    0.3
+Release:    0
 Group:      Qt/Qt
 License:    Unlicense <http://unlicense.org/>
 URL:        http://example.org/
