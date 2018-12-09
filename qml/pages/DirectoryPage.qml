@@ -258,6 +258,18 @@ Page {
     }
 
     /*
+     *  Creates a tar.gz of selected files
+     */
+    function tarFiles()
+    {
+        var tarFile = currentDir + "/filetug-" + Date.now() + ".tar.gz";
+        engine.tarFiles(tarFile, settings.dirPath, clipboard.getSelectedFiles());
+
+        // Reload the directory view
+        refreshDirectoryView();
+    }
+
+    /*
      *  Start or stop selecting files
      */
     function selectFiles(start)

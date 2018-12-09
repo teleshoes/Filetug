@@ -164,6 +164,20 @@ Item {
                 getDirectoryPage().performFileOperation("delete")
             }
         }
+        ListItem {
+            id: tarFiles
+            width: visible == true ? grid.elementWidth : 0
+            height: visible == true ? grid.elementHeight : 0
+            visible: false
+            Label {
+                text: "tar.gz"
+                anchors.centerIn: parent
+            }
+
+            onClicked: {
+                getDirectoryPage().tarFiles()
+            }
+        }
     }
 
     Connections {
@@ -210,6 +224,7 @@ Item {
             visibleItems += 2
             deleteFiles.visible = true
             renameFiles.visible = true
+            tarFiles.visible = true
             selectedFilesLabelVisible = true
             if (clipboard.getSelectedFileCount() == 1)
                 selectedFilesLabel.text = "1 entry selected"
@@ -220,6 +235,7 @@ Item {
         {
             deleteFiles.visible = false
             renameFiles.visible = false
+            tarFiles.visible = false
             selectedFilesLabel.visible = false
         }
 

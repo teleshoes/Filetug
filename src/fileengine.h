@@ -34,6 +34,7 @@ public:
                                           const QString &directory);
 
     Q_INVOKABLE void renameFiles(const QString &jsonString);
+    Q_INVOKABLE void tarFiles(const QString &tarFile, const QString &baseDir, const QStringList &fileList);
     Q_INVOKABLE void createEntries(const QString &jsonString);
 
     Q_INVOKABLE void copyToClipboard(const QString &string);

@@ -123,6 +123,31 @@ void FileEngine::renameFiles(const QString &jsonString)
 }
 
 /*
+ *  Create tar.gz with files
+ */
+void FileEngine::tarFiles(const QString &tarFile, const QString &baseDir, const QStringList &fileList)
+{
+    QProcess *proc = new QProcess();
+    QString exec = "tar";
+    QStringList params;
+
+    QString dir = baseDir;
+    dir = dir.remove(QRegExp("/$")) + "/";
+    QRegExp baseDirRe = QRegExp("^" + dir);
+
+    params << "-c";
+    params << "-z";
+    params << "-C" << dir;
+    params << "-f" << tarFile;
+    for (int i=0; i < fileList.length(); i++)
+    {
+        QString file = fileList.at(i);
+        params << file.remove(baseDirRe);
+    }
+    proc->start(exec, params);
+}
+
+/*
  *  Create files/directories based on the provided array
  */
 void FileEngine::createEntries(const QString &jsonString)
