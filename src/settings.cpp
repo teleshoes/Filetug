@@ -48,7 +48,7 @@ Settings::Settings(QObject *parent) :
     if (settings->contains("cacheThumbnails"))
         m_cacheThumbnails = settings->value("cacheThumbnails").toBool();
     else
-        m_cacheThumbnails = true;
+        m_cacheThumbnails = false;
 
     if (settings->contains("sortBy"))
         m_sortBy = settings->value("sortBy").toString();
