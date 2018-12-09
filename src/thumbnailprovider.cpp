@@ -2,6 +2,13 @@
 
 QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {
+    Settings *settings = new Settings();
+    if(!settings->getCacheThumbnails())
+    {
+        return QImage();
+    }
+    delete settings;
+
     QFileInfo fileInfo(id);
 
     QString idLC = id.toLower();
